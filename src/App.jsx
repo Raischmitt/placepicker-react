@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 
-import Places from './components/Places.jsx';
+import Places from './Components/Places.jsx';
 import { AVAILABLE_PLACES } from './data.js';
-import Modal from './components/Modal.jsx';
-import DeleteConfirmation from './components/DeleteConfirmation.jsx';
+import Modal from './Components/Modal.jsx';
+import DeleteConfirmation from './Components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import { sortPlacesByDistance } from './loc.js';
 
@@ -15,6 +15,11 @@ function App() {
 
   useEffect(() => {
     const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+    const storedPlaces = storedIds.map((id) =>
+      AVAILABLE_PLACES.find((place) => place.id === id)
+    );
+
+    setPickedPlaces(storedPlaces);
   }, []);
 
   useEffect(() => {
